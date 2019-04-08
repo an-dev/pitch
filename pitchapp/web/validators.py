@@ -1,4 +1,4 @@
-import mimetypes
+import magic
 
 from django.core.exceptions import ValidationError
 from django.template.defaultfilters import filesizeformat
@@ -32,7 +32,8 @@ class FileValidator(object):
         Check content type and file size.
         """
         # Check the content type
-        mimetype = mimetypes.guess_type(value.name)[0]
+        handler = magic.Magic(mime=True, uncompress=True)
+        mimetype = handler.from_file(value.file.name)
         if self.allowed_mimetypes and mimetype not in self.allowed_mimetypes:
             message = self.mime_message % {
                 'mimetype': mimetype,
