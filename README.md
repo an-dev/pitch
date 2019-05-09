@@ -1,4 +1,4 @@
-# Pitch upload
+# Pitch file upload & parse
 
 - Create a virtualenv (optional) and activate environment
 - Install dependencies with `pip install -r requirements.txt`
